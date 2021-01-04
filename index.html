@@ -1,0 +1,179 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/beige.css" id="theme">
+
+		<link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>OAuth</section>
+				<section>
+					<p>
+						 Versions of OAuth:
+					</p>
+					<h2>
+						<a href="https://tools.ietf.org/html/rfc5849">OAuth 1.0</a>
+					</h2>
+					<h2>
+							<a href="https://tools.ietf.org/html/rfc6749">OAuth 2.0</a>
+					</h2>
+				</section>
+				<section>
+					<p>What is OAuth 1.0?</p>
+					<blockquote>
+						OAuth provides a method for clients to access server resources on    behalf of a resource owner (such as a different client or an end-   user).  It also provides a process for end-users to authorize third-   party access to their server resources without sharing their    credentials (typically, a username and password pair), using user-agent redirections.
+					</blockquote>
+				</section>
+				<section>
+					<p>What is OAuth 2.0?</p>
+					<blockquote>
+						The OAuth 2.0 authorization framework enables a third-party application to obtain limited access to an HTTP service, either on behalf of a resource owner by orchestrating an approval interaction between the resource owner and the HTTP service, or by allowing the third-party application to obtain access on its own behalf.
+			 		</blockquote>
+				</section>
+			<section>
+				<section>
+					<p>How are OpenID and OAuth different?</p>
+					<h4>Purposes</h4>
+					<p>OpenID was created for federated authentication, that is, letting a third-party authenticate your users for you, by using accounts they already have.
+						OAuth was created to remove the need for users to share their passwords with third-party applications.</p>
+				</section>
+				<section>
+					<p>How are OpenID and OAuth different?</p>
+					<h4>Features</h4>
+					<p>
+						Both protocols provide a way for a site to redirect a user somewhere else and come back with a verifiable assertion. 
+						OpenID provides an <b>identity assertion</b> while OAuth is more generic in the form of an <b>access token</b> which can then be used to "ask the OAuth provider questions".
+					</p>
+				</section>
+				<section>
+					<p>How are OpenID and OAuth different?</p>
+					<h4>Technical Implementations</h4>
+					<p>OAuth authorize the user.</p>
+					<p>OpenID identity the user.</p>
+				</section>
+			</section>
+			<section>
+				<h4>Steps</h4>
+				<ol>
+					<li>
+							App requests authorization from User
+					</li>
+					<li>
+						User authorizes App and delivers proof
+					</li>
+					<li>
+						App presents proof of authorization to server to get a Token
+					</li>
+					<li>
+						Token is restricted to only access what the User authorized for the specific App
+					</li>
+				</ol>
+			</section>
+			<section>
+				<section>
+					<p>
+						OAuth Central Components
+					</p>
+					<ul>
+						<li>Scopes and Consent</li>
+						<li>Actors</li>
+						<li>Clients</li>
+						<li>Tokens</li>
+						<li>Authorization Server</li>
+						<li>Flows</li>
+					</ul>
+				</section>
+				<section>
+					<p>OAuth Scopes</p>
+					<img src="img/OAuth_Scopes.png"/>
+				</section>
+				<section>
+					<p>OAuth Actors</p>
+					<img src="img/OAuth_Actors.png"/>
+				</section>
+				<section>
+					<p>Clients can be public and confidential</p>
+					<img src="img/oauth_Clients.png"/>
+				</section>
+				<section>
+					<p>OAuth Tokens</p>
+					<ul>
+						<li>short-lived (hours and minutes)</li>
+						<li>longer-lived (days, months, years)</li>
+					</ul>
+				</section>
+				<section>
+					<p>
+						 Token define isn't in spec. Usually tokens used JSON web tokens <a href="https://tools.ietf.org/html/rfc7519">(a standard)</a>.
+					</p>
+				</section>
+				<section>
+					<p>Tokens are retrieved from endpoints on the authorization server</p>
+					<img src="img/authorization-server.png"/>
+				</section>
+				<section>
+					<p>
+						Two different flows: getting the authorization and getting the tokens.
+					</p>
+						<img src="img/flow-channels.png"/>
+				</section>
+				<section>
+					Example:
+					<ol>
+						<li>
+							Resource Owner starts flow to delegate access to protected resource
+						</li>
+						<li>
+							Client sends authorization request with desired scopes via browser redirect to the Authorize Endpoint on the Authorization Server
+						</li>
+						<li>
+							Authorization Server returns a consent dialog saying “do you allow this application to have access to these scopes?”. Client authenticate to the application or use cached session cookie.
+						</li>
+						<li>The authorization grant is passed back to the application via browser redirect.</li>
+					</ol>
+				</section>
+			</section>
+				<!-- References -->
+				<section>
+					References:
+					<ol>
+						<li>
+							<a href="https://tools.ietf.org/html/rfc5849">The OAuth 1.0 Protocol</a>
+						</li>
+						<li>
+							<a href="https://tools.ietf.org/html/rfc6749">The OAuth 2.0 Authorization Framework</a>
+						</li>
+						<li>
+							<a href="https://tools.ietf.org/html/rfc6750">The OAuth 2.0 Authorization Framework: Bearer Token Usage</a>
+						</li>
+						<li>
+								<a href="https://tools.ietf.org/html/rfc7519">JSON Web Token (JWT)</a>
+						</li>
+					</ul>
+					</section>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+
+			Reveal.initialize({
+				hash: true,
+
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
